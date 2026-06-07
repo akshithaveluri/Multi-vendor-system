@@ -1,0 +1,520 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header-inner h1 {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* Upload */
+.upload-zone {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 32px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+
+.upload-zone p {
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.upload-zone input {
+  display: none;
+}
+
+.upload-btn {
+  background: #667eea;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover {
+  background: #5a6fd6;
+}
+
+.upload-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.upload-status {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.upload-status.success {
+  color: #22c55e;
+}
+
+.upload-status.error {
+  color: #ef4444;
+}
+
+/* Document List */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.doc-table th,
+.doc-table td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.doc-table th {
+  font-weight: 600;
+  color: #666;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.doc-empty {
+  text-align: center;
+  color: #999;
+  padding: 24px 0;
+}
+
+.delete-btn {
+  background: none;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Chat */
+.chat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.messages {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-right: 4px;
+}
+
+.msg {
+  padding: 12px 16px;
+  border-radius: 10px;
+  max-width: 85%;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.msg.user {
+  background: #667eea;
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.msg.bot {
+  background: #f0f2f5;
+  color: #1a1a2e;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.msg.bot .sources {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.msg.bot .sources span {
+  display: inline-block;
+  background: #e5e7eb;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 4px;
+  margin-top: 4px;
+  font-size: 0.75rem;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input-row input:focus {
+  border-color: #667eea;
+}
+
+.chat-input-row button {
+  background: #667eea;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-input-row button:hover {
+  background: #5a6fd6;
+}
+
+.chat-input-row button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.no-docs-msg {
+  color: #999;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  background: #f0f2f5;
+  color: #333;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+/* Dashboard */
+.dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.analyze-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.analyze-btn:hover {
+  opacity: 0.9;
+}
+
+.analyze-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.dash-section {
+  background: #f8f9ff;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.dash-section h3 {
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+  color: #444;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.chart-box {
+  min-height: 320px;
+}
+
+/* Risk Cards */
+.risk-cards {
+  display: grid;
+  gap: 14px;
+}
+
+.risk-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 14px;
+  border-left: 4px solid #667eea;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.risk-card-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+.risk-card-score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.risk-bar-bg {
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.risk-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+
+.risk-card-level {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Terms Comparison */
+.terms-grid {
+  display: grid;
+  grid-template-columns: 120px repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0;
+  font-size: 0.85rem;
+}
+
+.terms-header {
+  font-weight: 600;
+  padding: 8px 10px;
+  background: #f0f2f5;
+  border-bottom: 2px solid #ddd;
+  word-break: break-word;
+}
+
+.terms-label {
+  font-weight: 500;
+  padding: 8px 10px;
+  color: #555;
+  border-bottom: 1px solid #eee;
+}
+
+.terms-value {
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  word-break: break-word;
+}
+
+/* Pros & Cons */
+.pros-cons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.pros-cons-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.pc-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.pc-assessment {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.pc-pros,
+.pc-cons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.pc-pros strong,
+.pc-cons strong {
+  width: 100%;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.tag-pro {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.tag-con {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Recommendation */
+.recommendation {
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+  border: 1px solid #c7d2fe;
+}
+
+.recommendation h3 {
+  color: #4338ca;
+}
+
+.recommendation p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .full-width {
+    grid-column: 1;
+  }
+  .tabs {
+    flex-wrap: wrap;
+  }
+  .tab {
+    flex: none;
+    min-width: calc(50% - 4px);
+  }
+}
